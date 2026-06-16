@@ -299,10 +299,8 @@ function BrandIcon({ name }: { name: string }) {
 }
 
 export default async function AboutPage() {
-  // Hide about page when clone branding is enabled
-  if (config.homepage?.useCloneBranding) {
-    notFound();
-  }
+  // Show about page for all branding modes (including clone)
+  // Originally hidden for clone branding, now visible for everyone
 
   const t = await getTranslations("about");
   const contributors = await getContributors();
