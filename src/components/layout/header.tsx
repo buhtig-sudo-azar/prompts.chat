@@ -53,6 +53,7 @@ import {
   Hammer,
   BookOpen,
   MoreHorizontal,
+  HelpCircle,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -277,6 +278,14 @@ export function Header({ authProvider = "credentials", allowRegistration = true 
                       </span>
                     </a>
                   )}
+                  <Link 
+                    href="/guide" 
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                  >
+                    <HelpCircle className="h-4 w-4" />
+                    Руководство
+                  </Link>
                 </div>
               </nav>
 
@@ -477,6 +486,12 @@ export function Header({ authProvider = "credentials", allowRegistration = true 
                   {t("nav.developers")}
                 </Link>
               </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/guide">
+                  <HelpCircle className="mr-2 h-4 w-4" />
+                  Руководство
+                </Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </nav>
@@ -508,6 +523,14 @@ export function Header({ authProvider = "credentials", allowRegistration = true 
               </span>
             </a>
           )}
+
+          {/* Help/Guide link */}
+          <Button asChild variant="ghost" size="icon" className="hidden lg:flex h-8 w-8">
+            <Link href="/guide" title="Руководство">
+              <HelpCircle className="h-4 w-4" />
+              <span className="sr-only">Руководство</span>
+            </Link>
+          </Button>
 
           {/* Developers link */}
           <Button asChild variant="ghost" size="icon" className="hidden 2xl:flex h-8 w-8">
