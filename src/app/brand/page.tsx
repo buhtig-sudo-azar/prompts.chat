@@ -6,7 +6,7 @@ import { Download, Copy, Check } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { useBranding } from "@/components/providers/branding-provider";
-import { notFound } from "next/navigation";
+
 
 // Promi logo SVG component for light backgrounds
 function PromiLogo({ className }: { className?: string }) {
@@ -175,10 +175,8 @@ export default function BrandAssetsPage() {
   const branding = useBranding();
   const t = useTranslations("brand");
 
-  // Redirect if using clone branding
-  if (branding.useCloneBranding) {
-    notFound();
-  }
+  // Show custom branding assets for clone instances
+  // (original page shows prompts.chat brand assets, we show our own)
 
   return (
     <div className="container max-w-4xl py-10">

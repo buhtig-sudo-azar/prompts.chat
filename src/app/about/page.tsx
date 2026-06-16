@@ -20,55 +20,60 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function getContributors() {
-  // Get unclaimed users (original GitHub contributors from CSV import)
-  const unclaimedUsers = await db.user.findMany({
-    where: {
-      email: { endsWith: "@unclaimed.prompts.chat" },
-      username: { notIn: excludedFromCommunity },
-    },
-    select: {
-      id: true,
-      username: true,
-      githubUsername: true,
-      _count: {
-        select: {
-          prompts: true,
-          contributions: true,
+  try {
+    // Get unclaimed users (original GitHub contributors from CSV import)
+    const unclaimedUsers = await db.user.findMany({
+      where: {
+        email: { endsWith: "@unclaimed.prompts.chat" },
+        username: { notIn: excludedFromCommunity },
+      },
+      select: {
+        id: true,
+        username: true,
+        githubUsername: true,
+        _count: {
+          select: {
+            prompts: true,
+            contributions: true,
+          },
         },
       },
-    },
-  });
+    });
 
-  // Get GitHub-authenticated users with contributions
-  const githubUsers = await db.user.findMany({
-    where: {
-      githubUsername: { not: null, notIn: excludedFromCommunity },
-      email: { not: { endsWith: "@unclaimed.prompts.chat" } },
-      OR: [
-        { prompts: { some: {} } },
-        { contributions: { some: {} } },
-      ],
-    },
-    select: {
-      id: true,
-      username: true,
-      githubUsername: true,
-      _count: {
-        select: {
-          prompts: true,
-          contributions: true,
+    // Get GitHub-authenticated users with contributions
+    const githubUsers = await db.user.findMany({
+      where: {
+        githubUsername: { not: null, notIn: excludedFromCommunity },
+        email: { not: { endsWith: "@unclaimed.prompts.chat" } },
+        OR: [
+          { prompts: { some: {} } },
+          { contributions: { some: {} } },
+        ],
+      },
+      select: {
+        id: true,
+        username: true,
+        githubUsername: true,
+        _count: {
+          select: {
+            prompts: true,
+            contributions: true,
+          },
         },
       },
-    },
-  });
+    });
 
-  const allUsers = [...unclaimedUsers, ...githubUsers];
-  
-  return allUsers.sort((a, b) => {
-    const aTotal = a._count.prompts + a._count.contributions;
-    const bTotal = b._count.prompts + b._count.contributions;
-    return bTotal - aTotal;
-  });
+    const allUsers = [...unclaimedUsers, ...githubUsers];
+    
+    return allUsers.sort((a, b) => {
+      const aTotal = a._count.prompts + a._count.contributions;
+      const bTotal = b._count.prompts + b._count.contributions;
+      return bTotal - aTotal;
+    });
+  } catch (error) {
+    console.error("Failed to fetch contributors:", error);
+    return [];
+  }
 }
 
 const techStack = [

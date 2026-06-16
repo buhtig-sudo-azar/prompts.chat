@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useBranding } from "@/components/providers/branding-provider";
-import { redirect } from "next/navigation";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -101,9 +101,8 @@ export default function SupportPage() {
   const branding = useBranding();
   const t = useTranslations("support");
 
-  if (branding.useCloneBranding) {
-    redirect("/");
-  }
+  // Show support page for all branding modes (including clone)
+  // Originally redirected to home for clone branding, now we show FAQ for everyone
 
   const faqItems = [
     { question: t("faq.whatIsPrompt.question"), answer: t("faq.whatIsPrompt.answer") },
