@@ -12,7 +12,7 @@
 
 <p align="center">
   <strong>The world's largest open-source prompt library for AI</strong><br>
-  <sub>Works with ChatGPT, Claude, Gemini, Llama, Mistral, and more</sub>
+  <sub>Works with ChatGPT, Gemini, Llama, Mistral, and more</sub>
 </p>
 <p align="center">
   <sub>formerly known as Awesome ChatGPT Prompts</sub>
@@ -139,13 +139,6 @@ The setup wizard configures branding, theme, authentication (GitHub/Google/Azure
 ```bash
 npx prompts.chat
 ```
-
-### Claude Code Plugin
-```
-/plugin marketplace add f/prompts.chat
-/plugin install prompts.chat@prompts.chat
-```
-📖 [Plugin Documentation](CLAUDE-PLUGIN.md)
 
 ### MCP Server
 Use prompts.chat as an MCP server in your AI tools.
