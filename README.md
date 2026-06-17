@@ -236,7 +236,7 @@ Use prompts.chat as an MCP server in your AI tools.
 </p>
 
 <p align="center">
-  <sub>Built with <a href="https://wind.surf/prompts-chat">Windsurf</a> and <a href="https://devin.ai">Devin</a></sub><br>
+  <sub>Built with care and craftsmanship</sub><br>
   <a href="https://github.com/sponsors/f/sponsorships?sponsor=f&tier_id=558224&preview=false"><strong>Become a Sponsor →</strong></a>
 </p>
 
